@@ -1,4 +1,5 @@
 import numpy as np
+from math import ceil
 
 from sklearn.svm import SVR
 from sklearn.metrics import r2_score
@@ -40,9 +41,26 @@ clf = SVR(kernel="rbf", C=800, epsilon=0.0625)
 clf.fit(X_train, y_train)
 pred = clf.predict(X_test)
 
+print("With float output")
 print("R2 score:\t\t", r2_score(y_test, pred))
 print("Explained Var:\t\t", explained_variance_score(y_test, pred))
 print("Mean Absolute Error:\t", mean_absolute_error(y_test, pred))
 print("Mean Squared Error:\t", mean_squared_error(y_test, pred))
 print("Mean Squared Log Error:\t", mean_squared_log_error(y_test, pred))
 print("Median Absolute Error:\t", median_absolute_error(y_test, pred))
+
+pred_int = np.array([round(y) for y in pred], dtype=np.int32)
+y_test_int = np.array([round(y) for y in y_test], dtype=np.int32)
+
+print("With int output")
+print("R2 score:\t\t", r2_score(y_test_int, pred_int))
+print("Explained Var:\t\t", explained_variance_score(y_test_int, pred_int))
+print("Mean Absolute Error:\t", mean_absolute_error(y_test_int, pred_int))
+print("Mean Squared Error:\t", mean_squared_error(y_test_int, pred_int))
+print("Mean Squared Log Error:\t", mean_squared_log_error(y_test_int, pred_int))
+print("Median Absolute Error:\t", median_absolute_error(y_test_int, pred_int))
+
+"""
+for i in range(400):
+    print("Real = ", y_test_int[i], ",\tPredicted = ", pred_int[i])
+    """
