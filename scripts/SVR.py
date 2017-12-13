@@ -31,9 +31,9 @@ def instanceGenerator(num_instances, file_loc, seperator=";", skip_instances = 0
             yield np.array(instance_data_raw, dtype=np.float64)
 
 
-data_size = 1000
+data_size = 4000
 
-data = np.array([instance for instance in instanceGenerator(data_size, "../WineData/winequality-red.csv")])
+data = np.array([instance for instance in instanceGenerator(data_size, "../WineData/winequality-white.csv")])
 
 X_data = np.array([data[i][:11] for i in range(len(data))])
 #X_data = np.array([
@@ -82,7 +82,7 @@ print("Mean Squared Log Error:\t", mean_squared_log_error(y_test_int, pred_int))
 print("Median Absolute Error:\t", median_absolute_error(y_test_int, pred_int))
 print("Accuracy:\t", accuracy_score(y_test_int, pred_int))
 
-print(confusion_matrix(y_test_int, pred_int))
+print(confusion_matrix(y_test_int, pred_int, labels=[1,2,3,4,5,6,7,8,9,10]))
 
 """
 print("Comparison with random data")
